@@ -112,3 +112,4 @@ C:\Users\fdhg0\Documents\La U\Teoria de base de datos 1\PagilaDemo\obj\Debug\net
 C:\Users\fdhg0\Documents\La U\Teoria de base de datos 1\PagilaDemo\obj\Debug\net10.0\PagilaDemo.pdb
 C:\Users\fdhg0\Documents\La U\Teoria de base de datos 1\PagilaDemo\obj\Debug\net10.0\PagilaDemo.genruntimeconfig.cache
 C:\Users\fdhg0\Documents\La U\Teoria de base de datos 1\PagilaDemo\obj\Debug\net10.0\ref\PagilaDemo.dll
+C:\Users\fdhg0\Documents\La U\Teoria de base de datos 1\PagilaDemo\obj\Debug\net10.0\PagilaDemo.sourcelink.json

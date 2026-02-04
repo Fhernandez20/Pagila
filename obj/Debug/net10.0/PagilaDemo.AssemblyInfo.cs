@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PagilaDemo")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54f23cf698c768bd86a8251515c32c18dd3122b1")]
 [assembly: System.Reflection.AssemblyProductAttribute("PagilaDemo")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PagilaDemo")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
