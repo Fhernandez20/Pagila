@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using PagilaDemo.Models;
 
 namespace PagilaDemo
@@ -8,15 +7,6 @@ namespace PagilaDemo
     {
         static void Main(string[] args)
         {
-
-            Seleccion();
-            Console.WriteLine("\n" + new string('=', 60) + "\n");
-
-            Proyeccion();
-            Console.WriteLine("\n" + new string('=', 60) + "\n");
-
-            UnionYDiferencia();
-            Console.WriteLine("\n" + new string('=', 60) + "\n");
 
             // 1. Producto Cartesiano
             ProductoCartesiano();
@@ -33,120 +23,6 @@ namespace PagilaDemo
 
             Console.WriteLine("\n\nPresiona cualquier tecla para salir...");
             Console.ReadKey();
-        }
-
-
-        static void Seleccion()
-        {
-            Console.WriteLine("Seleccion");
-
-            using (var context = new PagilaContext())
-            {
-                var seleccion = context.Films
-                .Where(f=> f.Rating == "PG-13" && f.Length >120)
-                .Select(f=> new { f.Title, f.Rating, f.Length})
-                .OrderBy(f=>f.Title)
-                .ToList();
-
-                Console.WriteLine($"Numero de registros con una clasificacion PG-13 y duracion mayor a 120 minutos: {seleccion.Count} \n");
-
-                if (seleccion.Count > 0)
-                {
-                    foreach(var s in seleccion)
-                    {
-                        Console.WriteLine($"- {s.Title} | {s.Rating} | {s.Length} mins");
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("No se encontraron registros que cumplan los requisitos");
-                }
-            }
-        }
-
-        static void Proyeccion()
-        {
-            Console.WriteLine("Proyeccion\n");
-            using(var context = new PagilaContext())
-            {
-                //Tipo anonimo
-                var proyeccionAnonima = context.Customers
-                .Select(c => new
-                {
-                    Nombre = c.FirstName,
-                    Email = c.Email,
-                    Activo= c.Active
-                })
-                .OrderBy(c=>c.FirstName)
-                .ToList();
-
-                foreach(var p in proyeccionAnonima)
-                {
-                    Console.WriteLine($"- {p.Nombre} | {p.Email} | Activo: {p.Activo}");
-                }
-
-                //Con clase DTO
-                var proyeccionDTO = context.Customers
-                .Select(c=> new ClienteProyeccionDTO
-                {
-                    Nombre = c.FirstName,
-                    Email = c.Email,
-                    EstadoActivo = c.Active? "Activo" : "Inactivo"
-                })
-                .OrderBy(c=>c.FirstName)
-                .ToList();
-
-                foreach(var pr in proyeccionDTO)
-                {
-                    Console.WriteLine($"- {pr.Nombre} | {pr.Email} | {pr.EstadoActivo}");
-                }
-            }
-        }
-
-        //Union
-        static void UnionYDiferencia()
-        {
-            Console.WriteLine("Union y diferencia");
-
-            using (var context = new PagilaContext())
-            {
-                //spain tiene id de 87
-                var ciudadesEspana = context.Cities
-                .Where(c=>c.CountryId==87)
-                .Select(c=>c.CityName)
-                .ToList();
-
-                var ciudadesM = context.Cities
-                .Where(c=>c.CityName.StartsWith("M"))
-                .Select(c=>c.CityName)
-                .ToList();
-
-                var union = ciudadesEspana.
-                Union(ciudadesM)
-                .OrderBy(c=>c)
-                .ToList();
-
-                var diferencia=ciudadesEspana
-                .Except(ciudadesM)
-                .OrderBy(c=>c)
-                .ToList();
-
-                Console.WriteLine($"Numero de ciudades de Spain:  {ciudadesEspana.Count}");
-                Console.WriteLine($"Numero de ciudades que empiezan con M: {ciudadesM.Count}");
-
-                Console.WriteLine("Union");
-                foreach(var ciudad in union)
-                {
-                    Console.WriteLine($"- {ciudad}");
-                }
-
-                Console.WriteLine("Diferencia");
-                foreach(var ciudad in diferencia)
-                {
-                    Console.WriteLine($"- {ciudad}");
-                }
-
-            }
         }
 
         // Producto Cartesiano
@@ -251,12 +127,4 @@ static void InnerJoinFilmLanguage()
             }
         }
     }
-
-
-    public class ClienteProyeccionDTO
-{
-    public string Nombre { get; set; }
-    public string Email { get; set; }
-    public string EstadoActivo { get; set; }  
-}
 }
